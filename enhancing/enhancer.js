@@ -19,7 +19,7 @@ module.exports = {
 // If the item enhancement level is 20, the enhancement level is not changed.
 // The durability of the item is not changed.
 function succeed(item) {
-  return { ...item };
+  return {...item, enhancement: item.enhancement + 1 };
 }
 
 //a fail(item) method that accepts an item object and returns a new item object modified according to the rules defined by the client for enhancement failure.
