@@ -24,7 +24,7 @@ function succeed(item) {
   } else if ( item.enhancement == 20){
     return {...item}
   } else {
-    return "Your Item is Can Not Exist"
+    return "Your Item Can Not Exist"
   }
   ;
 }
@@ -35,22 +35,32 @@ function succeed(item) {
 // If the item's enhancement level is greater than 16, the enhancement level decreases by 1 (17 goes down to 16, 18 goes down to 17).
 function fail(item) {
   const {enhancement, durability} = item;
-  if(enhancement < 15 && enhancement > -1){
+  if(enhancement < 15 && enhancement > -1 && durability < 5){
+    return { ...item, durability: 0 }
+  } else if ((enhancement == 15 && durability< 10)|| enhancement == 16 && durability< 10){
+    return { ...item, durability: 0 }
+  } else if (enhancement > 16 && enhancement < 21 && durability < 10){
+    return { ...item, durability: 0, enhancement: enhancement -1 }
+  } else if(enhancement < 15 && enhancement > -1){
     return { ...item, durability: durability -5 }
   } else if (enhancement == 15 || enhancement == 16){
     return { ...item, durability: durability - 10 }
   } else if (enhancement > 16 && enhancement < 21){
     return { ...item, durability: durability - 10, enhancement: enhancement -1 }
   } else {
-    return "Your Item is Can Not Exist"
+    return "Your Item Can Not Exist"
   }
   
 }
 
 // a repair(item) method that accepts an item object and returns a new item with the durability restored to 100. This method is the simplest of the three and would be a good starting point on this project.
 function repair(item) {
-  return { ...item };
+  const {enhancement, durability} = item
+  return { ...item, durability: 100};
 }
+
+
+
 
 function get(item) {
   return { ...item };

@@ -38,14 +38,14 @@ describe('enhancer.js', () => {
               name: "sword",
               enhancement: 21,
               durability: 50 
-           })).toEqual("Your Item is Can Not Exist")
+           })).toEqual("Your Item Can Not Exist")
     })
     it('Items Cannot be under a 0 of Enhancement', function(){
         expect(succeed({
               name: "sword",
               enhancement: -1,
               durability: 50 
-           })).toEqual("Your Item is Can Not Exist")
+           })).toEqual("Your Item Can Not Exist")
     })
   })
 
@@ -61,7 +61,18 @@ describe('enhancer.js', () => {
               durability: 45 
             })
     })
-    it('', function(){
+    it('Durability should fall by 0 if the enhancement is between 0 and 14 and durability is less than 5', function(){
+        expect(fail({
+              name: "sword",
+              enhancement: 14,
+              durability: 4 
+           })).toEqual({
+              name: "sword",
+              enhancement: 14,
+              durability: 0 
+            })
+    })
+    it('if enhancement is 15 or 16 durability drops by 10', function(){
         expect(fail({
             name: 'sword',
             enhancement: 16,
@@ -72,6 +83,97 @@ describe('enhancer.js', () => {
             durability: 40
         })
     })
+    it('if enhancement is 15 or 16 and durability is less than 10 then durability drops to 0', function(){
+        expect(fail({
+            name: 'sword',
+            enhancement: 16,
+            durability: 9
+        })).toEqual({
+            name: 'sword',
+            enhancement: 16,
+            durability: 0
+        })
+    })
+    it('if enhancement is over 16 durability drops by 10 and enhancement drops by 1', function(){
+        expect(fail({
+            name: 'sword',
+            enhancement: 18,
+            durability: 50
+        })).toEqual({
+            name: 'sword',
+            enhancement: 17,
+            durability: 40
+        })
+    })
+    it('if enhancement is over 16 and durability is less than 10 then durability drops to 0 and enhancement drops by 1', function(){
+        expect(fail({
+            name: 'sword',
+            enhancement: 18,
+            durability: 7
+        })).toEqual({
+            name: 'sword',
+            enhancement: 17,
+            durability: 0
+        })
+    })
+    it('if enhancement is over 20 item cant exist', function(){
+        expect(fail({
+            name: 'sword',
+            enhancement: 21,
+            durability: 50
+        })).toEqual("Your Item Can Not Exist")
+    })
+    it('if enhancement is under 0 item cant exist', function(){
+        expect(fail({
+            name: 'sword',
+            enhancement: -1,
+            durability: 50
+        })).toEqual("Your Item Can Not Exist")
+    })
+
+
+  })
+
+  describe('.repair()', function(){
+    it('Durability should be restored to 100', function(){
+        expect(repair({
+              name: "sword",
+              enhancement: 14,
+              durability: 90 
+           })).toEqual({
+              name: "sword",
+              enhancement: 14,
+              durability: 100 
+            })
+    })
+    // it('if enhancement is over 20 item cant exist', function(){
+    //     expect(fail({
+    //         name: 'sword',
+    //         enhancement: 21,
+    //         durability: 50
+    //     })).toEqual("Your Item Can Not Exist")
+    // })
+    // it('if enhancement is under 0 item cant exist', function(){
+    //     expect(fail({
+    //         name: 'sword',
+    //         enhancement: -1,
+    //         durability: 50
+    //     })).toEqual("Your Item Can Not Exist")
+    // })
+    // it('if durability is over 100 item cant exist', function(){
+    //     expect(fail({
+    //         name: 'sword',
+    //         enhancement: 14,
+    //         durability: 101
+    //     })).toEqual("Your Item Can Not Exist")
+    // })
+    // it('if durability is under 0 item cant exist', function(){
+    //     expect(fail({
+    //         name: 'sword',
+    //         enhancement: 14,
+    //         durability: -1
+    //     })).toEqual("Your Item Can Not Exist")
+    // })
 
 
   })
