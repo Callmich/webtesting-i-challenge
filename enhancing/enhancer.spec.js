@@ -146,34 +146,34 @@ describe('enhancer.js', () => {
               durability: 100 
             })
     })
-    // it('if enhancement is over 20 item cant exist', function(){
-    //     expect(fail({
-    //         name: 'sword',
-    //         enhancement: 21,
-    //         durability: 50
-    //     })).toEqual("Your Item Can Not Exist")
-    // })
-    // it('if enhancement is under 0 item cant exist', function(){
-    //     expect(fail({
-    //         name: 'sword',
-    //         enhancement: -1,
-    //         durability: 50
-    //     })).toEqual("Your Item Can Not Exist")
-    // })
-    // it('if durability is over 100 item cant exist', function(){
-    //     expect(fail({
-    //         name: 'sword',
-    //         enhancement: 14,
-    //         durability: 101
-    //     })).toEqual("Your Item Can Not Exist")
-    // })
-    // it('if durability is under 0 item cant exist', function(){
-    //     expect(fail({
-    //         name: 'sword',
-    //         enhancement: 14,
-    //         durability: -1
-    //     })).toEqual("Your Item Can Not Exist")
-    // })
+    it('if enhancement is over 20 item cant exist', function(){
+        expect(repair({
+            name: 'sword',
+            enhancement: 21,
+            durability: 50
+        })).toEqual("Your Item Can Not Exist")
+    })
+    it('if enhancement is under 0 item cant exist', function(){
+        expect(repair({
+            name: 'sword',
+            enhancement: -1,
+            durability: 50
+        })).toEqual("Your Item Can Not Exist")
+    })
+    it('if durability is over 100 item cant exist', function(){
+        expect(repair({
+            name: 'sword',
+            enhancement: 14,
+            durability: 101
+        })).toEqual("Your Item Can Not Exist")
+    })
+    it('if durability is under 0 item cant exist', function(){
+        expect(repair({
+            name: 'sword',
+            enhancement: 14,
+            durability: -1
+        })).toEqual("Your Item Can Not Exist")
+    })
 
 
   })

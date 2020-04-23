@@ -19,9 +19,10 @@ module.exports = {
 // If the item enhancement level is 20, the enhancement level is not changed.
 // The durability of the item is not changed.
 function succeed(item) {
-  if(item.enhancement <20 && item.enhancement > -1 ){
-    return {...item, enhancement: item.enhancement + 1 }
-  } else if ( item.enhancement == 20){
+  const {enhancement} = item;
+  if(enhancement <20 && enhancement > -1 ){
+    return {...item, enhancement: enhancement + 1 }
+  } else if ( enhancement == 20){
     return {...item}
   } else {
     return "Your Item Can Not Exist"
@@ -56,7 +57,12 @@ function fail(item) {
 // a repair(item) method that accepts an item object and returns a new item with the durability restored to 100. This method is the simplest of the three and would be a good starting point on this project.
 function repair(item) {
   const {enhancement, durability} = item
-  return { ...item, durability: 100};
+
+  if(enhancement > 20 || enhancement < 0 || durability > 100 || durability < 0){
+    return "Your Item Can Not Exist"
+  }else{
+    return { ...item, durability: 100}
+  }
 }
 
 
